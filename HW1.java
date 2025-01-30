@@ -1,6 +1,5 @@
-
 /*
- * *** PLACE YOUR NAME / SECTION  HERE ***
+ * *** Sulaiman Mohamed / 272 001 ***
  *
  * Homework # 1 (Programming Assignment). This Java class defines some basic
  * manipulation operations on Linked-Lists and Stacks.
@@ -48,7 +47,7 @@ public class HW1 {
 
         /*
          * Method sortedInsert() - this method will insert a new node to the
-         * linked list containing the value specific in teh parameter 'data'.
+         * linked list containing the value specific in the parameter 'data'.
          * The newly inserted node will be inserted in sorted order within
          * the linked-list.
          *
@@ -83,13 +82,22 @@ public class HW1 {
          * value that is less than the provided parameter 'ltValue'.
          *
          * The method will invoke the method removeElements for each element
-         * found in the linked-list that is less than thr parameter value passed.
+         * found in the linked-list that is less than the parameter value passed.
          */
         public void removeElementsLT ( int ltValue ) {
-
-            // YOUR CODE GOES HERE
-
-            return;
+            // Remove elements from the head if they are less than ltValue
+            while (head != null && head.data < ltValue) {
+                head = head.next;
+            }
+            // Remove elements from the rest of the list
+            Node current = head;
+            while (current != null && current.next != null) {
+                if (current.next.data < ltValue) {
+                    current.next = current.next.next;
+                } else {
+                    current = current.next;
+                }
+            }
         }
 
 
@@ -97,12 +105,20 @@ public class HW1 {
          * Method removeElement() - this method removes all nodes that contain a
          * value equal to the value the provided parameter 'value'.
          */
-
         public void removeElement ( int value ) {
-
-            // YOUR CODE GOES HERE
-
-            return;
+            // Remove elements from the head if they are equal to value
+            while (head != null && head.data == value) {
+                head = head.next;
+            }
+            // Remove elements from the rest of the list
+            Node current = head;
+            while (current != null && current.next != null) {
+                if (current.next.data == value) {
+                    current.next = current.next.next;
+                } else {
+                    current = current.next;
+                }
+            }
         }
 
 
@@ -156,12 +172,17 @@ public class HW1 {
          * The method should utilize the provided Stack class.
          */
         public static boolean isPalindrome(String input) {
-
             Stack<Character> stack = new Stack<>();
             input = input.toLowerCase().replaceAll("\\s+", "");
-
-            // Your CODE GOES HERE
-            return false;
+            for (char c : input.toCharArray()) {
+                stack.push(c);
+            }
+            for (char c : input.toCharArray()) {
+                if (c != stack.pop()) {
+                    return false;
+                }
+            }
+            return true;
         }
 
 
@@ -178,12 +199,30 @@ public class HW1 {
          * destroy the passed in stack, meaning when the method returns, the passed in
          * stack should be identical to when this method is passed. One trick as you
          * pop elements off the passed in stack, place them in a temp stack. Then when
-         * completed, place them all back in teh original stack.
+         * completed, place them all back in the original stack.
          */
         public static int findLargestK(Stack<Integer> stack, int k) {
+            Stack<Integer> tempStack = new Stack<>();
+            int largestIndex = -1;
+            int currentIndex = 0;
+            int size = stack.size(); // Get the initial size of the stack
 
-            // YOUR CODE GOES HERE
-            return -1;
+            // Iterate through the stack to find the largest index of k
+            while (!stack.isEmpty()) {
+                int value = stack.pop();
+                if (value == k) {
+                    largestIndex = size - 1 - currentIndex; // Calculate the correct index
+                }
+                tempStack.push(value);
+                currentIndex++;
+            }
+
+            // Restore the original stack
+            while (!tempStack.isEmpty()) {
+                stack.push(tempStack.pop());
+            }
+
+            return largestIndex;
         }
 
     }  // End class Stacks
@@ -215,11 +254,10 @@ public class HW1 {
          *   3. O(N + M) time, O(1) space
          *   4. O(N * M) time, O(N + M) space
          *
-         * TODO: return the answer (which option is correct), in the return statement
+         * The correct option is O(N + M) time, O(1) space
         */
 
-        // RETURN THE CORRECT OPTION NUMBER LISTED ABOVE
-        return -1;
+        return 3; // RETURN THE CORRECT OPTION NUMBER LISTED ABOVE
     }
 
 
@@ -229,19 +267,16 @@ public class HW1 {
             for ( j = 2; j <= n; j = j*2 )
                 k+= n/2;
 
+       
         /*
          * Select the correct option listed below:
-         *   1. O(N) time
-         *   2. O(N log N) time
-         *   3. O(N^2) time
-         *   4. O(N^2Log n) time
+         *   1. O(N * M) time, O(1) space
+         *   2. O(N + M) time, O(N + M) space
+         *   3. O(N + M) time, O(1) space
+         *   4. O(N * M) time, O(N + M) space
          *
-         * TODO: return the answer (which option is correct), in the return statement
-         */
+         * The correct option is O(N + M) time, O(N + M) space
+        */
 
-        // RETURN THE CORRECT OPTION LISTED ABOVE
-        return -1;
+        return -2; 
     }
-
-}
-
